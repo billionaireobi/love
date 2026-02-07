@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #12080c;
+  color: rgba(255, 255, 255, 0.9);
+  overflow-x: hidden;
+}
+
+.journey-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.journey-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(190, 77, 107, 0.35);
+  color: #fff;
+}
+
+.journey-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.journey-container::-webkit-scrollbar-track {
+  background: rgba(26, 10, 15, 0.5);
+}
+
+.journey-container::-webkit-scrollbar-thumb {
+  background: rgba(190, 77, 107, 0.5);
+  border-radius: 3px;
+}
+
+.journey-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 180, 188, 0.6);
+}
+
+/* Subtle gradient overlay for romantic feel */
+.romantic-gradient-bg {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(190, 77, 107, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(232, 180, 188, 0.06) 0%, transparent 50%),
+    #12080c;
+}
