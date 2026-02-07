@@ -4,18 +4,21 @@ import { REASONS_I_LOVE_YOU } from '../data/moments';
 
 const container = {
   hidden: { opacity: 0 },
-  visible: (i = 1) => ({
+  visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.06, delayChildren: 0.1 * i },
-  }),
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4 },
+    transition: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
 
@@ -44,7 +47,7 @@ export default function ReasonsSection() {
       </motion.p>
 
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full"
         variants={container}
         initial="hidden"
         whileInView="visible"
@@ -55,43 +58,62 @@ export default function ReasonsSection() {
             <motion.button
               type="button"
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="w-full text-left rounded-2xl border border-romantic-rose/25 bg-white/5 hover:bg-romantic-rose/10 hover:border-romantic-rose/40 transition-all duration-200 py-4 px-5 min-h-[72px] flex items-center shadow-romantic-soft"
-              whileHover={{ scale: 1.02 }}
+              className="w-full text-left rounded-2xl border border-romantic-rose/25 bg-white/5 hover:bg-romantic-rose/10 hover:border-romantic-rose/40 transition-colors duration-200 py-5 px-5 min-h-[80px] flex items-center gap-4 shadow-romantic-soft overflow-hidden"
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              <AnimatePresence mode="wait">
-                {openIndex === i ? (
-                  <motion.p
-                    key="text"
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    className="font-sans text-romantic-blush text-sm md:text-base leading-relaxed pr-8"
-                  >
-                    {reason}
-                  </motion.p>
-                ) : (
-                  <motion.span
-                    key="placeholder"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="font-sans text-romantic-gold/70 text-sm flex items-center gap-2"
-                  >
-                    <motion.span
-                      className="text-romantic-rose"
-                      animate={{ scale: [1, 1.15, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+              {/* Character / emoji — always visible, animates when open */}
+              <motion.span
+                className="text-2xl md:text-3xl flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-romantic-rose/15 border border-romantic-rose/20"
+                animate={
+                  openIndex === i
+                    ? { scale: [1, 1.2, 1.1], rotate: [0, 5, -5, 0] }
+                    : { scale: 1, rotate: 0 }
+                }
+                transition={{
+                  duration: 0.5,
+                  type: 'spring',
+                  stiffness: 260,
+                  damping: 18,
+                }}
+              >
+                {reason.emoji}
+              </motion.span>
+
+              <div className="flex-1 min-w-0 pr-8">
+                <AnimatePresence mode="wait">
+                  {openIndex === i ? (
+                    <motion.p
+                      key="text"
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 8 }}
+                      transition={{ duration: 0.3 }}
+                      className="font-sans text-romantic-blush text-sm md:text-base leading-relaxed"
                     >
-                      ♥
+                      {reason.text}
+                    </motion.p>
+                  ) : (
+                    <motion.span
+                      key="placeholder"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="font-sans text-romantic-gold/70 text-sm flex items-center gap-2"
+                    >
+                      <span className="text-romantic-rose/80">Reason {i + 1}</span>
                     </motion.span>
-                    Reason {i + 1}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-              <span className="absolute top-4 right-4 text-romantic-rose/50 text-lg leading-none">
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <motion.span
+                className="absolute top-4 right-4 text-romantic-rose/50 text-lg leading-none"
+                animate={{ rotate: openIndex === i ? 90 : 0 }}
+                transition={{ duration: 0.25 }}
+              >
                 {openIndex === i ? '×' : '+'}
-              </span>
+              </motion.span>
             </motion.button>
           </motion.div>
         ))}

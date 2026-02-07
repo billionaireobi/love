@@ -38,14 +38,14 @@ export const MOMENTS = [
 ];
 
 export const REASONS_I_LOVE_YOU = [
-  'You make me want to be better.',
-  'You listen — really listen.',
-  'You laugh at my jokes (even the bad ones).',
-  "You're kind when it matters most.",
-  "You're my peace and my excitement.",
-  'You believe in us.',
-  "You're the first person I want to tell everything to.",
-  "You make ordinary moments feel like magic.",
+  { emoji: '💪', text: 'You make me want to be better.' },
+  { emoji: '👂', text: 'You listen — really listen.' },
+  { emoji: '😂', text: 'You laugh at my jokes (even the bad ones).' },
+  { emoji: '💕', text: "You're kind when it matters most." },
+  { emoji: '✨', text: "You're my peace and my excitement." },
+  { emoji: '🤝', text: 'You believe in us.' },
+  { emoji: '💬', text: "You're the first person I want to tell everything to." },
+  { emoji: '🪄', text: "You make ordinary moments feel like magic." },
 ];
 
 export const LOVE_LETTER = `My love,
